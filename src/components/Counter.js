@@ -1,25 +1,31 @@
 import classes from "./Counter.module.css";
 import { useSelector, useDispatch } from "react-redux";
 
+import { counterActions } from "../store/index.js";
+
 const Counter = () => {
   const dispatch = useDispatch();
   const counter = useSelector((state) => state.counter);
   const show = useSelector((state) => state.showCounter);
 
   const toggleCounterHandler = () => {
-    dispatch({ type: "toggle" });
+    dispatch(counterActions.toggleCounter());
   };
 
   const incrementHandler = () => {
-    dispatch({ type: "increment" });
+    dispatch(counterActions.increment());
   };
 
   const increaseHandler = () => {
-    dispatch({ type: "increase", amount: 5 });
+    dispatch(counterActions.increase(5)); // { type: SOME_UNIQUE_IDENTIFIER, payload: 5 }
+    // aqui el payload se crea solo, ya no tengo la libertad de ponerle el nombre que quiera.
+    // por tanto, en el store, en el metodo increase de reducers debo cambiar action.amount
+    // por action.payload porque ese es el nombre de la propiedad en caso de agregar un dato
+    // extra que pueda enviar.
   };
 
   const decrementHandler = () => {
-    dispatch({ type: "decrement" });
+    dispatch(counterActions.decrement());
   };
 
   return (
