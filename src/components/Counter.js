@@ -5,8 +5,8 @@ import { counterActions } from "../store/index.js";
 
 const Counter = () => {
   const dispatch = useDispatch();
-  const counter = useSelector((state) => state.counter);
-  const show = useSelector((state) => state.showCounter);
+  const counter = useSelector((state) => state.counter.counter);
+  const show = useSelector((state) => state.counter.showCounter);
 
   const toggleCounterHandler = () => {
     dispatch(counterActions.toggleCounter());
@@ -17,11 +17,7 @@ const Counter = () => {
   };
 
   const increaseHandler = () => {
-    dispatch(counterActions.increase(5)); // { type: SOME_UNIQUE_IDENTIFIER, payload: 5 }
-    // aqui el payload se crea solo, ya no tengo la libertad de ponerle el nombre que quiera.
-    // por tanto, en el store, en el metodo increase de reducers debo cambiar action.amount
-    // por action.payload porque ese es el nombre de la propiedad en caso de agregar un dato
-    // extra que pueda enviar.
+    dispatch(counterActions.increase(5));
   };
 
   const decrementHandler = () => {
